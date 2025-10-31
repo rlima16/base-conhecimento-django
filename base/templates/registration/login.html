@@ -1,0 +1,115 @@
+{% extends 'base/base.html' %}
+{% load static %}
+
+{% block title %}Login{% endblock %}
+
+{% block head_extra %}
+<style>
+    body {
+        background-color: #343a40 !important; /* Fundo cinza escuro */
+        padding-top: 0 !important; /* Remove o espaço da navbar */
+    }
+    
+    /* 1. ESCONDE a navbar, o sidebar E A BUSCA */
+    .navbar,
+    .sidebar-wrapper,
+    .search-bar-wrapper { /* <-- CORREÇÃO APLICADA AQUI */
+        display: none !important;
+    }
+
+    /* 2. FAZ o conteúdo principal ocupar a tela inteira */
+    .page-wrapper {
+        display: grid;
+        grid-template-columns: 1fr !important; /* Uma única coluna */
+        height: 100vh !important; /* 100% da altura da tela */
+    }
+    
+    .main-content {
+        grid-column: 1 / -1 !important; /* Ocupa toda a largura */
+        overflow-y: auto;
+        /* Centraliza o container-fluid (que é o filho direto) */
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    /* 3. Esconde o footer (rodapé) da página de login */
+    .main-content footer {
+        display: none;
+    }
+    
+    /* 4. REGRA DE CENTRALIZAÇÃO: Faz o container (que está dentro do main-content) centralizar o card */
+    .main-content .container-fluid {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 0 !important; /* Remove o padding "p-4" do template base */
+        height: 100%; /* Garante que o container ocupe a altura toda */
+    }
+
+    /* --- Estilos do Card (Dark Mode) --- */
+    .card {
+        background-color: #212529; /* Card cinza bem escuro */
+        color: #f8f9fa;            /* Texto (labels) em branco-gelo */
+        border: none;
+        width: 100%;
+        max-width: 450px; /* Limita a largura do card de login */
+    }
+    hr {
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
+        opacity: 1;
+    }
+    .form-control {
+        background-color: #343a40; /* Fundo do input (mesma cor do body) */
+        color: #f8f9fa;            /* Texto digitado em branco-gelo */
+        border-color: #495057;     /* Borda do input cinza médio */
+    }
+    .form-control:focus {
+        background-color: #343a40;
+        color: #f8f9fa;
+        border-color: #005A9C;     /* Cor da borda azul (do seu botão) */
+        box-shadow: 0 0 0 0.25rem rgba(0, 90, 156, 0.5); /* Sombra do foco azul */
+    }
+    input:-webkit-autofill,
+    input:-webkit-autofill:hover, 
+    input:-webkit-autofill:focus, 
+    input:-webkit-autofill:active  {
+        -webkit-box-shadow: 0 0 0 30px #343a40 inset !important; /* Fundo */
+        -webkit-text-fill-color: #f8f9fa !important; /* Texto */
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="card shadow-sm border-0">
+    <div class="card-body p-5">
+        
+        <div class="text-center mb-4">
+            <img src="{% static 'base/logo-flypabx.png' %}" alt="Logo Flypabx" class="img-fluid" style="max-height: 70px;">
+        </div>
+        <hr>
+
+        {% if form.errors %}
+            <div class="alert alert-danger">
+                Seu usuário ou senha estão incorretos.
+            </div>
+        {% endif %}
+        
+        <form method="post" action="{% url 'login' %}">
+            {% csrf_token %}
+            <input type="hidden" name="next" value="{{ next }}">
+            <div class="mb-3">
+                <label for="id_username" class="form-label">Usuário</label>
+                <input type="text" name="username" id="id_username" class="form-control form-control-lg" required>
+            </div>
+            <div class="mb-3">
+                <label for="id_password" class="form-label">Senha</label>
+                <input type="password" name="password" id="id_password" class="form-control form-control-lg" required>
+            </div>
+            <div class="d-grid mt-4">
+                <button type="submit" class="btn btn-primary btn-lg">Entrar</button>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}

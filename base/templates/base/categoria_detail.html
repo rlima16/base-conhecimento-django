@@ -1,0 +1,56 @@
+{% extends 'base/base.html' %}
+
+{% block title %}{{ categoria.nome }}{% endblock %}
+
+{% block content %}
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class.breadcrumb-item"><a href="{% url 'home' %}">Início</a></li>
+    {% if categoria.parent %}
+    <li class="breadcrumb-item"><a href="{% url 'categoria_detail' categoria.parent.slug %}">{{ categoria.parent.nome }}</a></li>
+    {% endif %}
+    <li class="breadcrumb-item active" aria-current="page">{{ categoria.nome }}</li>
+  </ol>
+</nav>
+
+<h1 class="mb-4">Categoria: {{ categoria.nome }}</h1>
+
+{% if subcategorias %}
+<div class="card shadow-sm mb-4">
+    <div class="card-header">
+        <h2 class="h5 mb-0"><i class="bi bi-folder2-open me-2"></i>Subcategorias</h2>
+    </div>
+    <div class="list-group list-group-flush">
+        {% for subcat in subcategorias %}
+        <a href="{% url 'categoria_detail' subcat.slug %}" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
+            <span><i class="bi bi-folder me-2"></i>{{ subcat.nome }}</span>
+            <span class="badge bg-secondary rounded-pill">{{ subcat.artigos.count }}</span> 
+        </a>
+        {% endfor %}
+    </div>
+</div>
+{% endif %}
+
+
+{% if artigos %}
+<div class="card shadow-sm">
+    <div class="card-header">
+        <h2 class="h5 mb-0"><i class="bi bi-file-earmark-text me-2"></i>Artigos nesta Categoria</h2>
+    </div>
+    <div class="list-group list-group-flush">
+        {% for art in artigos %}
+        <a href="{% url 'artigo_detail' art.slug %}{% if request.GET.highlight %}?highlight={{ request.GET.highlight }}{% endif %}" class="list-group-item list-group-item-action">
+           <i class="bi bi-file-earmark me-2"></i> {{ art.titulo }}
+        </a>
+        {% endfor %}
+    </div>
+</div>
+{% endif %}
+
+{% if not subcategorias and not artigos %}
+<div class="alert alert-info" role="alert">
+  <i class="bi bi-info-circle-fill me-2"></i>Nenhum item encontrado nesta categoria.
+</div>
+{% endif %}
+
+{% endblock %}

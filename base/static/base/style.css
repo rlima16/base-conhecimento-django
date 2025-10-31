@@ -1,0 +1,167 @@
+/* base/static/base/style.css */
+
+/* ========================================================
+   CORES PRINCIPAIS (AJUSTE SE QUISER)
+   ======================================================== */
+:root {
+    --cor-primaria-flypabx: #005A9C;
+    --cor-secundaria-flypabx: #00BFFF;
+    --cor-fundo-claro: #f8f9fa;
+    --cor-texto: #212529;
+}
+
+/* ========================================================
+   ESTILOS GERAIS (DA NAVEGAÇÃO E ARTIGOS)
+   ======================================================== */
+body {
+    background-color: var(--cor-fundo-claro);
+}
+
+.navbar-dark.bg-dark {
+    background-color: #212529 !important; /* Cor preta/cinza escuro */
+}
+
+.btn-primary, .badge.bg-primary {
+    background-color: var(--cor-primaria-flypabx);
+    border-color: var(--cor-primaria-flypabx);
+}
+
+.btn-primary:hover, .btn-outline-light:hover {
+    opacity: 0.9;
+}
+
+a, .list-group-item-action {
+    color: var(--cor-primaria-flypabx);
+    text-decoration: none;
+}
+
+a:hover {
+    color: var(--cor-secundaria-flypabx);
+}
+
+.artigo-conteudo {
+    line-height: 1.7;
+    white-space: pre-wrap; 
+}
+
+.artigo-conteudo img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+/* ========================================================
+   CSS PARA O LAYOUT DO SISTEMA (SIDEBAR)
+   ======================================================== */
+
+html, body {
+    height: 100%;
+}
+
+body {
+    padding-top: 56px; /* Altura da navbar fixa */
+    background-color: var(--cor-fundo-claro);
+}
+
+.page-wrapper {
+    display: grid;
+    grid-template-columns: 260px 1fr; /* Largura da sidebar | Restante da tela */
+    height: calc(100vh - 56px); 
+}
+
+/* --- ESTILOS DO SIDEBAR (MENU LATERAL) --- */
+.sidebar-wrapper {
+    background-color: #212529;
+    color: #f8f9fa;
+    overflow-y: auto; 
+    height: calc(100vh - 56px); 
+}
+
+.sidebar-nav {
+    list-style: none;
+    padding-left: 0;
+    margin: 0;
+    padding-top: 1rem;
+}
+
+.sidebar-nav-item-title {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    font-weight: 700;
+    color: #6c757d;
+    padding: 0.5rem 1.5rem;
+}
+
+.sidebar-nav-item-divider {
+    height: 1px;
+    background-color: rgba(255, 255, 255, 0.1);
+    margin: 1rem 1.5rem;
+}
+
+.sidebar-nav-link {
+    display: flex;
+    align-items: center;
+    color: #adb5bd;
+    text-decoration: none;
+    padding: 0.75rem 1.5rem;
+    transition: all 0.2s ease;
+}
+
+.sidebar-nav-link i {
+    font-size: 1.1rem;
+    margin-right: 0.75rem;
+    width: 20px;
+}
+
+.sidebar-nav-link:hover {
+    background-color: rgba(255, 255, 255, 0.05);
+    color: #ffffff;
+}
+
+/* --- ESTILOS DO CONTEÚDO PRINCIPAL --- */
+.main-content {
+    grid-column: 2 / 3;
+    overflow-y: auto;
+    height: calc(100vh - 56px);
+}
+
+
+
+
+/* --- ESTILO DO DESTAQUE DA PALAVRA --- */
+.highlight-search {
+    background-color: #FFF3A3;
+    color: #000;
+    font-weight: bold;
+    padding: 1px 3px;
+    border-radius: 3px;
+}
+
+/* NENHUM CÓDIGO DO LOGIN.HTML (COMO .navbar { display: none; }) 
+ESTÁ PRESENTE NESTE ARQUIVO.
+*/
+
+/* ========================================================
+   ESTILO PARA O LOGO NO SIDEBAR (ADICIONADO DE VOLTA)
+   ======================================================== */
+.sidebar-logo-wrapper {
+    padding: 1.5rem 1rem; /* Espaçamento (em cima/baixo | dos lados) */
+    text-align: center;
+    /* Adiciona uma linha divisória igual a do menu */
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1); 
+}
+
+.sidebar-logo-wrapper .img-fluid {
+    max-height: 60px; /* Define uma altura máxima para o logo. Ajuste se precisar. */
+    width: auto;
+}
+
+# flypabx_kb/settings.py (no final do arquivo)
+
+STATIC_URL = '/static/'
+STATIC_ROOT = BASE_DIR / 'staticfiles' # Onde o servidor vai coletar os arquivos
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = BASE_DIR / 'media' # Onde os uploads (ex: imagens do CKEditor) ficarão salvos

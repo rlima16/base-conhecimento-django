@@ -1,0 +1,30 @@
+{% extends 'base/base.html' %}
+
+{% block title %}Início{% endblock %}
+
+{% block content %}
+<div class="p-5 mb-4 bg-light rounded-3 shadow-sm">
+    <div class="container-fluid py-5">
+        
+        <h1 class="display-5 fw-bold">Bem-vindo, {{ user.first_name|default:user.username }}!</h1>
+
+        <p class="col-md-8 fs-4">Encontre guias, tutoriais e soluções na Base de Conhecimento da Flypabx.</p>
+    </div>
+</div>
+
+<div class="card shadow-sm">
+    <div class="card-header">
+        <h2 class="h5 mb-0">Artigos Recentes</h2>
+    </div>
+    <div class="list-group list-group-flush">
+        {% for art in artigos_recentes %}
+        <a href="{% url 'artigo_detail' art.slug %}" class="list-group-item list-group-item-action">
+            {{ art.titulo }}
+            <span class="d-block text-muted small">em &raquo; {{ art.categoria.nome }}</span>
+        </a>
+        {% empty %}
+        <li class="list-group-item">Nenhum artigo encontrado.</li>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

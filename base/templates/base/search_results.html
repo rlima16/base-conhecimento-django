@@ -1,0 +1,28 @@
+{% extends 'base/base.html' %}
+
+{% block title %}Resultados para "{{ query }}"{% endblock %}
+
+{% block content %}
+<div class="card shadow-sm">
+    <div class="card-header">
+        <h1 class="h4 mb-0">
+            {% if results %}
+                Resultados da busca por: "{{ query }}"
+            {% else %}
+                Nenhum resultado encontrado para: "{{ query }}"
+            {% endif %}
+        </h1>
+    </div>
+
+    <div class="list-group list-group-flush">
+        {% for art in results %}
+        <a href="{% url 'artigo_detail' art.slug %}?highlight={{ query }}" class="list-group-item list-group-item-action">
+            {{ art.titulo }}
+            <span class="d-block text-muted small">em &raquo; {{ art.categoria.nome }}</span>
+        </a>
+        {% empty %}
+        <li class="list-group-item">Nenhum artigo encontrado.</li>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

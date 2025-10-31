@@ -1,0 +1,60 @@
+/* base/static/base/style.css */
+
+/* ========================================================
+   !!! IMPORTANTE: SUBSTITUA ESTAS CORES PELAS DA FLYPABX !!!
+   ========================================================
+*/
+:root {
+    /* EU ESTOU USANDO AZUIS GENÉRICOS. VOCÊ DEVE MUDAR AQUI! */
+    --cor-primaria-flypabx: #005A9C;   /* Ex: O azul principal da sua marca */
+    --cor-secundaria-flypabx: #00BFFF; /* Ex: Um tom de destaque da sua marca */
+    --cor-fundo-claro: #f8f9fa;
+    --cor-texto: #212529;
+}
+
+/* Ajustes modernos */
+body {
+    background-color: var(--cor-fundo-claro);
+}
+
+/* Ajustes do Bootstrap com suas cores */
+.navbar-dark.bg-dark {
+    background-color: var(--cor-primaria-flypabx) !important;
+}
+
+.btn-primary, .badge.bg-primary {
+    background-color: var(--cor-primaria-flypabx);
+    border-color: var(--cor-primaria-flypabx);
+}
+
+.btn-primary:hover, .btn-outline-light:hover {
+    opacity: 0.9;
+}
+
+/* Links */
+a, .list-group-item-action {
+    color: var(--cor-primaria-flypabx);
+    text-decoration: none;
+}
+
+a:hover {
+    color: var(--cor-secundaria-flypabx);
+}
+
+/* --- Correção do seu artigo "blocado" --- */
+.artigo-conteudo {
+    line-height: 1.7; /* Melhora a leitura */
+}
+
+/* Faz o conteúdo do artigo quebrar linha e usar parágrafos */
+.artigo-conteudo {
+    white-space: pre-wrap; 
+}
+
+.artigo-conteudo img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
